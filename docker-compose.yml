@@ -3,13 +3,13 @@ services:
     build:
       context: ./backend/api-gateway
       dockerfile: Dockerfile
-    container_name: fractal-api-gateway
+    container_name: test-api-gateway
     ports:
       - "3000:3000"
     environment:
       - NODE_ENV=production
       - PORT=3000
-      - JWT_SECRET=${JWT_SECRET:-secret}
+      - JWT_SECRET=hjbascbkhesf324hcsjknsdc
       - USER_SERVICE_URL=http://user-service:3001
       - WORKSHEET_SERVICE_URL=http://worksheet-service:3002
       - PAYMENT_SERVICE_URL=http://payment-service:3003
@@ -21,43 +21,43 @@ services:
       - payment-service
       - notification-service
     networks:
-      - fractal-network
+      - test-network
 
   user-service:
     build:
       context: ./backend/user-service
       dockerfile: Dockerfile
-    container_name: fractal-user-service
+    container_name: test-user-service
     ports:
       - "3001:3001"
     environment:
       - NODE_ENV=production
       - PORT=3001
       - MONGODB_URL=mongodb+srv://yogesh3332:tCGdpj1IHnID13J4@cluster0.pwjc7nq.mongodb.net/microservice?retryWrites=true&w=majority&appName=Cluster0
-      - JWT_SECRET=${JWT_SECRET:-secret}
+      - JWT_SECRET=hjbascbkhesf324hcsjknsdc
     networks:
-      - fractal-network
+      - test-network
 
   worksheet-service:
     build:
       context: ./backend/worksheet-service
       dockerfile: Dockerfile
-    container_name: fractal-worksheet-service
+    container_name: test-worksheet-service
     ports:
       - "3002:3002"
     environment:
       - NODE_ENV=production
       - PORT=3002
       - MONGODB_URL=mongodb+srv://yogesh3332:tCGdpj1IHnID13J4@cluster0.pwjc7nq.mongodb.net/microservice?retryWrites=true&w=majority&appName=Cluster0
-      - JWT_SECRET=${JWT_SECRET:-secret}
+      - JWT_SECRET=hjbascbkhesf324hcsjknsdc
     networks:
-      - fractal-network
+      - test-network
 
   payment-service:
     build:
       context: ./backend/payment-service
       dockerfile: Dockerfile
-    container_name: fractal-payment-service
+    container_name: test-payment-service
     ports:
       - "3003:3003"
     environment:
@@ -65,26 +65,26 @@ services:
       - PORT=3003
       - MONGODB_URL=mongodb+srv://yogesh3332:tCGdpj1IHnID13J4@cluster0.pwjc7nq.mongodb.net/microservice?retryWrites=true&w=majority&appName=Cluster0
     networks:
-      - fractal-network
+      - test-network
 
   notification-service:
     build:
       context: ./backend/notification-service
       dockerfile: Dockerfile
-    container_name: fractal-notification-service
+    container_name: test-notification-service
     ports:
       - "3004:3004"
     environment:
       - NODE_ENV=production
       - PORT=3004
     networks:
-      - fractal-network
+      - test-network
 
   frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile
-    container_name: fractal-frontend
+    container_name: test-frontend
     ports:
       - "4005:3000"
     environment:
@@ -92,8 +92,8 @@ services:
     depends_on:
       - api-gateway
     networks:
-      - fractal-network
+      - test-network
 
 networks:
-  fractal-network:
+  test-network:
     driver: bridge
