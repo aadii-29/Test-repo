@@ -7,7 +7,7 @@ on:
       - dev
 
 env:
-  EC2_PROJECT_PATH: ~/deployment
+  EC2_PROJECT_PATH: /home/ubuntu/deployment
 
 jobs:
   build-and-push-backend:
